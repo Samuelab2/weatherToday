@@ -15,7 +15,7 @@ const App = () => (
       <Switch>
         <Route exact path='/' component={Home} />
         <Route exact path='/forecast' component={Forecast} />
-        <Route exact path='/weather/:id' component={Weather} />
+        <Route exact path='/:id' component={Weather} />
         <Route component={NotFound} />
       </Switch>
   </Router>
