@@ -6,6 +6,17 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "@vx/axis": "^0.0.198",
+    "@vx/curve": "^0.0.198",
+    "@vx/event": "^0.0.198",
+    "@vx/gradient": "^0.0.198",
+    "@vx/grid": "^0.0.198",
+    "@vx/group": "^0.0.198",
+    "@vx/mock-data": "^0.0.198",
+    "@vx/responsive": "^0.0.198",
+    "@vx/scale": "^0.0.198",
+    "@vx/shape": "^0.0.198",
+    "@vx/tooltip": "^0.0.198",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-helmet": "^6.1.0",
@@ -33,7 +44,7 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },  
+  },
   "resolutions": {
     "styled-components": "^5"
   }

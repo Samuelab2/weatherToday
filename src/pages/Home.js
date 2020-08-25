@@ -26,8 +26,8 @@ const Home = () => {
             <>
               <h3>La información del tiempo actual para Santiago de Chile es:</h3>
               <p>fecha y hora: {new Date(data.current.dt * 1000).toLocaleString()}</p>
-              <p>Amanecer: {new Date(data.current.sunrise * 1000).toLocaleString()}</p>
-              <p>Atardecer {new Date(data.current.sunset * 1000).toLocaleString()}</p>
+              <p>Amanecer: {new Date(data.current.sunrise * 1000).toLocaleTimeString()}</p>
+              <p>Atardecer {new Date(data.current.sunset * 1000).toLocaleTimeString()}</p>
               <p>Temperatura {data.current.temp} Celcius</p>
               <p>Clima Actual:</p>
               <ul>
@@ -43,9 +43,9 @@ const Home = () => {
                 data.daily.map((item, index) => {
                   return (
                     <Link to={ { pathname: `/${item.dt}`, state: { data: item } } } key={index}>
-                      <p>fecha y hora: {new Date(item.dt * 1000).toLocaleString()}</p>
-                      <p>Amanecer: {new Date(item.sunrise * 1000).toLocaleString()}</p>
-                      <p>Atardecer {new Date(item.sunset * 1000).toLocaleString()}</p>
+                      <p>fecha y hora: {new Date(item.dt * 1000).toDateString()}</p>
+                      <p>Amanecer: {new Date(item.sunrise * 1000).toLocaleTimeString()}</p>
+                      <p>Atardecer {new Date(item.sunset * 1000).toLocaleTimeString()}</p>
                       <ul>
                         <li>id: {item.weather[0].id}</li>
                         <li>Principal: {item.weather[0].main}</li>
