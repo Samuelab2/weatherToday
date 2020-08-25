@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { AreaClosed, Bar } from '@vx/shape';
-import appleStock from '@vx/mock-data/lib/mocks/appleStock';
 import { curveMonotoneX } from '@vx/curve';
 import { scaleTime, scaleLinear } from '@vx/scale';
 import { useTooltip, Tooltip, defaultStyles } from '@vx/tooltip';
@@ -9,7 +8,6 @@ import { LinearGradient } from '@vx/gradient';
 import { max, extent, bisector } from 'd3-array';
 import { timeFormat } from 'd3-time-format';
 
-const stock = appleStock.slice(800);
 export const background = '#3b6978';
 export const background2 = '#204051';
 export const accentColor = '#edffea';
@@ -29,14 +27,14 @@ const tooltipStyles = {
 const formatDate = timeFormat("%b %d, '%y");
 
 // accessors
-const getDate = (d) => new Date(d.date);
-const getStockValue = (d) => d.close;
-const bisectDate = bisector(d => new Date(d.date)).left;
+const getDate = (d) => new Date(d.x);
+const getStockValue = (d) => d.y;
+const bisectDate = bisector(d => new Date(d.x)).left;
 
-const Graphic = () => {
+const Graphic = ({ data }) => {
   const {
     width = 400,
-    height = 400,
+    height = 200,
     margin = { top: 0, right: 0, bottom: 0, left: 0 },
     showTooltip,
     hideTooltip,
@@ -56,12 +54,12 @@ const Graphic = () => {
   // scales
   const dateScale = scaleTime({
     range: [0, xMax],
-    domain: extent(stock, getDate),
+    domain: extent(data, getDate),
   })
 
   const stockValueScale = scaleLinear({
     range: [yMax, 0],
-    domain: [0, (max(stock, getStockValue) || 0) + yMax / 3],
+    domain: [0, (max(data, getStockValue) || 0) + yMax / 10],
     nice: true,
   })
 
@@ -69,9 +67,9 @@ const Graphic = () => {
   const handleTooltip = (event) => {
     const { x } = localPoint(event);
     const x0 = dateScale.invert(x);
-    const index = bisectDate(stock, x0, 1);
-    const d0 = stock[index - 1];
-    const d1 = stock[index];
+    const index = bisectDate(data, x0, 1);
+    const d0 = data[index - 1];
+    const d1 = data[index];
     let d = d0;
     if (d1 && getDate(d1)) {
       d = x0.valueOf() - getDate(d0).valueOf() > getDate(d1).valueOf() - x0.valueOf() ? d1 : d0;
@@ -97,7 +95,7 @@ const Graphic = () => {
         <LinearGradient id="area-background-gradient" from={background} to={background2} />
         <LinearGradient id="area-gradient" from={accentColor} to={accentColor} toOpacity={0.1} />
         <AreaClosed
-          data={stock}
+          data={data}
           x={d => dateScale(getDate(d))}
           y={d => stockValueScale(getStockValue(d))}
           yScale={stockValueScale}
@@ -121,11 +119,10 @@ const Graphic = () => {
       </svg>
       {tooltipData && (
         <>
-          <Tooltip key={Math.random()} top={tooltipTop - 12} left={tooltipLeft + 12} style={tooltipStyles}>
-            {`$${getStockValue(tooltipData)}`}
+          <Tooltip top={tooltipTop - 12} left={tooltipLeft + 12} style={tooltipStyles}>
+            {`${getStockValue(tooltipData)} ° C`}
           </Tooltip>
           <Tooltip
-            key={Math.random()}
             top={yMax - 14}
             left={tooltipLeft}
             style={{
