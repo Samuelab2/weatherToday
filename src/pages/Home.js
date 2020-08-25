@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import Layout from '../components/Layout'
 import { getCurrent } from '../api/api'
 
 const Home = () => {
   const [ data, setData ] = useState()
-  const [ isLoading, setIsloading ] = useState()
+  const [ isLoading, setIsloading ] = useState(true)
 
   useEffect(() => {
     getData()
   }, [])
 
   const getData = async () => {
-    setIsloading(true)
     const data = await getCurrent()
     setData(data)
     setIsloading(false)
@@ -42,7 +42,7 @@ const Home = () => {
               {
                 data.daily.map((item, index) => {
                   return (
-                    <li key={index}>
+                    <Link to={ { pathname: `/${item.dt}`, state: { data: item } } } key={index}>
                       <p>fecha y hora: {new Date(item.dt * 1000).toLocaleString()}</p>
                       <p>Amanecer: {new Date(item.sunrise * 1000).toLocaleString()}</p>
                       <p>Atardecer {new Date(item.sunset * 1000).toLocaleString()}</p>
@@ -54,7 +54,7 @@ const Home = () => {
                           <img src={`http://openweathermap.org/img/wn/${item.weather[0].icon}.png`} alt='weather icon' />
                         </li>
                       </ul>
-                    </li>
+                    </Link>
                   )
                 })
               }
