@@ -30,7 +30,7 @@ const Graphic = ({ data, type }) => {
   const formatDate = type === 'hours' ? timeFormat("%A, %-I:%M:%S %p") : timeFormat("%A, %-d/%-m/%Y")
 
   const {
-    width = 400,
+    width = 450,
     height = 200,
     margin = { top: 0, right: 0, bottom: 0, left: 0 },
     showTooltip,
@@ -79,7 +79,7 @@ const Graphic = ({ data, type }) => {
   }
 
   return (
-    <div>
+    <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
       <svg width={width} height={height} ref={svgRef}>
         <rect
           x={0}
@@ -152,7 +152,7 @@ const Graphic = ({ data, type }) => {
             {`${getTempValue(tooltipData)} ° C`}
           </Tooltip>
           <Tooltip
-            top={yMax + 20}
+            top={yMax - 40}
             left={tooltipLeft}
             style={{
               ...defaultStyles,

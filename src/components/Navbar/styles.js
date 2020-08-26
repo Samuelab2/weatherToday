@@ -4,7 +4,7 @@ import { NavLink as NavLinkRouter } from 'react-router-dom'
 
 export const Nav = styled.nav`
   background: #fcfcfc;
-  border-top: 1px solid #e0e0e0;
+  border: 1px solid #e0e0e0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,6 +17,8 @@ export const Nav = styled.nav`
   right: 0;
   bottom: 0;
   z-index: 1;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 `
 
 export const NavLink = styled(NavLinkRouter)`
