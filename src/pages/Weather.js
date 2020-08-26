@@ -15,6 +15,7 @@ const Weather = ({ location }) => {
   return (
     <Layout title={days[new Date(data.dt * 1000).getDay()]} subtitle='details for the day ....'>
       <WeatherMainView data={data} />
+      
       {
         isLoading 
         ? <LoadingStyle loading={isLoading} type='graph' />

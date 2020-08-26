@@ -8,7 +8,7 @@ import LoadingStyle from '../components/LoadingStyle'
 import WeatherMainView from '../components/WeatherMainView'
 
 const Home = () => {
-  const { dataHourly, dataCurrent, dataDaily, isLoading, graphDaily } = useData()
+  const { dataCurrent, dataDaily, isLoading, graphDaily } = useData()
 
   const days = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado']
 
@@ -17,12 +17,14 @@ const Home = () => {
       { isLoading 
         ? <LoadingStyle loading={isLoading} type='view' />
         : (<>
-            <WeatherMainView data={dataCurrent} />
+            <Link to={ { pathname: `/${days[new Date(dataCurrent.dt * 1000).getDay()]}`, state: { currentDay: dataCurrent } } }>
+              <WeatherMainView data={dataCurrent} />
+            </Link>
             <GeneralTitle>Pronostico para los proximos 5 dias:</GeneralTitle>
             {
               dataDaily.map((item, index) => {
                 return (
-                  <Link to={ { pathname: `/${days[new Date(item.dt * 1000).getDay()]}`, state: { currentDay: item, hourly: dataHourly, daily: dataDaily } } } key={index}>
+                  <Link to={ { pathname: `/${days[new Date(item.dt * 1000).getDay()]}`, state: { currentDay: item } } } key={index}>
                     <WeatherCard data={item} />
                   </Link>
                 )

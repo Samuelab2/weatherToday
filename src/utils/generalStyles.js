@@ -36,3 +36,8 @@ export const GeneralTitle = styled.h3`
   color: #9e531d;
   font-weight: bold;
 `
+
+export const Text = styled(GeneralTitle)`
+  font-size: 40px;
+  margin: auto;
+`
