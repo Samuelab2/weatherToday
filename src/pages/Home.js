@@ -10,7 +10,7 @@ import WeatherMainView from '../components/WeatherMainView'
 const Home = () => {
   const { dataHourly, dataCurrent, dataDaily, isLoading, graphDaily } = useData()
 
-  const days = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes']
+  const days = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado']
 
   return (
     <Layout title='Home' subtitle='Forecast for the next 5 days'>

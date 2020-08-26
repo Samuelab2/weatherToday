@@ -4,11 +4,13 @@ import Graphic from '../components/Graphic'
 import WeatherMainView from '../components/WeatherMainView'
 import { useForecast } from '../hooks/useForecast'
 import LoadingStyle from '../components/LoadingStyle'
+import { GeneralTitle } from '../utils/generalStyles'
+
 
 const Weather = ({ location }) => {
   const [ data ] = useState(location.state.currentDay)
   const { isLoading, graphHours } = useForecast(location.state.currentDay)
-  const days = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes']
+  const days = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado']
 
   return (
     <Layout title={days[new Date(data.dt * 1000).getDay()]} subtitle='details for the day ....'>
@@ -18,7 +20,7 @@ const Weather = ({ location }) => {
         ? <LoadingStyle loading={isLoading} type='graph' />
         : (
           <>
-            <h3>Variación de la temperatura promedio cada 3 horas</h3>
+            <GeneralTitle>Variación de la temperatura promedio cada 3 horas</GeneralTitle>
             <Graphic data={graphHours} type='hours' />
           </>
         )

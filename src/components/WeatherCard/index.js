@@ -2,6 +2,8 @@ import React from 'react'
 import { Div, Container, Title, ContainerTitles, SubTitle } from './styles'
 
 const WeatherCard = ({ data }) => {
+  const days = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado']
+
   return (
     <Div bg={data.weather[0].description}>
       <Container>
@@ -10,7 +12,8 @@ const WeatherCard = ({ data }) => {
         <span>{data.weather[0].description}</span>
       </Container>
       <ContainerTitles>
-        <SubTitle>{new Date(data.dt * 1000).toDateString()}</SubTitle>
+        <SubTitle>{days[new Date(data.dt * 1000).getDay()]}</SubTitle>
+        <SubTitle>{new Date(data.dt * 1000).toLocaleDateString('en-US')}</SubTitle>
         <SubTitle>Humedad: {data.humidity}%</SubTitle>
         <SubTitle>Viento: {data.wind_speed} mts</SubTitle>
         <SubTitle>Presión: {data.pressure} hPa</SubTitle>
