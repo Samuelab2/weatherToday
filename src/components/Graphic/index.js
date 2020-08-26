@@ -15,23 +15,22 @@ export const accentColorDark = '#75daad';
 const tooltipStyles = {
   ...defaultStyles,
   background,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
   position: 'absolute',
   border: '1px solid white',
   color: 'white',
 };
 
 // util
-const formatDate = timeFormat("%b %d, '%y");
 
 // accessors
 const getDate = (d) => new Date(d.x);
 const getStockValue = (d) => d.y;
 const bisectDate = bisector(d => new Date(d.x)).left;
 
-const Graphic = ({ data }) => {
+const Graphic = ({ data, type }) => {
+  
+  const formatDate = type === 'hours' ? timeFormat("%A, %-I:%M:%S %p") : timeFormat("%A, %-d/%-m/%Y")
+
   const {
     width = 400,
     height = 200,

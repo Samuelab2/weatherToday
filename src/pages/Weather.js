@@ -1,42 +1,18 @@
 import React, { useState } from 'react'
 import Layout from '../components/Layout'
 import Graphic from '../components/Graphic'
+import { useForecast } from '../hooks/useForecast'
 
 const Weather = ({ location }) => {
   const [ data, setData ] = useState(location.state.currentDay)
-  const [ dataHourly, setDataHourly ] = useState(location.state.hourly)
-  const [ dataDaily, setDataDaily ] = useState(location.state.daily)
-  const [ graphDaily, setGraphDaily ] = useState()
-  const [ graphHours, setGraphHours ] = useState()
-
-  const getDataHourGraph = () => {
-    const currentDay = new Date(data.dt * 1000).getDate()
-    const arr = []
-    dataHourly.forEach(item => {
-      let objDay = new Date(item.dt * 1000).getDate()
-      if (objDay === currentDay) {
-        arr.push({x: item.dt * 1000, y: item.temp})
-      }
-    })
-    setGraphHours(arr)
-  }
-
-  const getDataDayGraph = () => {
-    const arr = []
-    dataDaily.forEach(item => {
-      arr.push({x: item.dt * 1000, y: (item.temp.max + item.temp.min) / 2})
-    })
-    setGraphDaily(arr)
-  }
-
-
+  const { isLoading, graphHours } = useForecast(location.state.currentDay)
 
   return (
     <Layout title='dia' subtitle='details for the day ....'>
       <>
         <h3>El dia {`${new Date(data.dt * 1000).toDateString()}`}, la información del clima es la siguiente:</h3>
-        <p onClick={getDataHourGraph}>Amanecer: {new Date(data.sunrise * 1000).toLocaleTimeString()}</p>
-        <p onClick={getDataDayGraph} >Atardecer {new Date(data.sunset * 1000).toLocaleTimeString()}</p>
+        <p>Amanecer: {new Date(data.sunrise * 1000).toLocaleTimeString()}</p>
+        <p>Atardecer {new Date(data.sunset * 1000).toLocaleTimeString()}</p>
         <p>Temperatura:</p>
         <p>Temperatura Minima: {data.temp.min} Celcius</p>
         <p>Temperatura Maxima: {data.temp.max} Celcius</p>
@@ -54,22 +30,17 @@ const Weather = ({ location }) => {
           </li>
         </ul>
       </>
+
       {
-        graphDaily && (
+        isLoading 
+        ? <h3>Cargando grafico...</h3>
+        : (
           <div style={{ position: 'relative' }}>
-            <Graphic data={graphDaily} />
+            <h3>Variación de la temperatura promedio cada 3 horas</h3>
+            <Graphic data={graphHours} type='hours' />
           </div>
         )
       }
-
-      {
-        graphHours && (
-          <div style={{ position: 'relative' }}>
-            <Graphic data={graphHours} />
-          </div>
-        )
-      }
-
     </Layout>
   )
 }

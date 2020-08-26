@@ -1,29 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import Layout from '../components/Layout'
-import { getCurrent } from '../api/api'
+import Graphic from '../components/Graphic'
+import { useData } from '../hooks/useData'
 
 const Home = () => {
-  const [ data, setData ] = useState()
-  const [ dataHourly, setDataHourly ] = useState()
-  const [ dataCurrent, setDataCurrent ] = useState()
-  const [ dataDaily, setDataDaily ] = useState()
-  const [ isLoading, setIsloading ] = useState(true)
-
-  useEffect(() => {
-    getData()
-  }, [])
-
-  const getData = async () => {
-    const data = await getCurrent()
-    setDataHourly(data.hourly)
-    setDataCurrent(data.current)
-    setDataDaily(data.daily)
-    setIsloading(false)
-  }
+  const { dataHourly, dataCurrent, dataDaily, isLoading, graphDaily } = useData()
 
   return (
-    <Layout title='Home' subtitle='Forecast for the next 7 days'>
+    <Layout title='Home' subtitle='Forecast for the next 5 days'>
       {
         isLoading 
           ? <h1>Cargando...</h1> 
@@ -43,7 +28,7 @@ const Home = () => {
                   <img src={`http://openweathermap.org/img/wn/${dataCurrent.weather[0].icon}.png`} alt='weather icon' />
                 </li>
               </ul>
-              <h3>Pronostico para los proximos 7 dias:</h3>
+              <h3>Pronostico para los proximos 5 dias:</h3>
               {
                 dataDaily.map((item, index) => {
                   return (
@@ -62,6 +47,14 @@ const Home = () => {
                     </Link>
                   )
                 })
+              }
+              {
+                graphDaily && (
+                  <div style={{ position: 'relative' }}>
+                    <h3>Variación de temperatura para los proximos 5 dias:</h3>
+                    <Graphic data={graphDaily} type='hours' />
+                  </div>
+                )
               }
             </>
           )

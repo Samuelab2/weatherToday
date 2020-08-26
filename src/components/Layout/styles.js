@@ -2,6 +2,6 @@ import styled from 'styled-components'
 
 export const Div = styled.div`
   margin: 0 auto;
-  padding: 50px 25px;
+  padding: 50px 25px 60px;
   max-width: 500px;
 `
