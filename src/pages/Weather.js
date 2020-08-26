@@ -5,7 +5,7 @@ import WeatherMainView from '../components/WeatherMainView'
 import { useForecast } from '../hooks/useForecast'
 import LoadingStyle from '../components/LoadingStyle'
 import { GeneralTitle } from '../utils/generalStyles'
-
+import DayOverview from '../components/DayOverview'
 
 const Weather = ({ location }) => {
   const [ data ] = useState(location.state.currentDay)
@@ -15,7 +15,8 @@ const Weather = ({ location }) => {
   return (
     <Layout title={days[new Date(data.dt * 1000).getDay()]} subtitle='details for the day ....'>
       <WeatherMainView data={data} />
-      
+      <GeneralTitle>Otra información relevante:</GeneralTitle>
+      <DayOverview data={data} />
       {
         isLoading 
         ? <LoadingStyle loading={isLoading} type='graph' />

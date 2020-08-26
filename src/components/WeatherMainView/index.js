@@ -9,16 +9,14 @@ const WeatherMainView = ({ data }) => {
       <Title>Santiago</Title>
       <SubTitle>{`${days[new Date(data.dt * 1000).getDay()]}, ${new Date(data.dt * 1000).toLocaleTimeString('en-US')}`}</SubTitle>
       <img src={`http://openweathermap.org/img/wn/${data.weather[0].icon === '01n' ? '01d' : data.weather[0].icon}@2x.png`} alt='weather icon' />
-      {
-        data.temp.day ? <FocusElement>{data.temp.day}°C  </FocusElement> : <FocusElement>{data.temp}°C</FocusElement>
-      }
+      <FocusElement>{data.temp.day}°C  </FocusElement>
       <SubTitle>{data.weather[0].description}</SubTitle>
       <span role='img' aria-label='emoji amanecer'>🌄: {new Date(data.sunrise * 1000).toLocaleTimeString('en-US')}</span>
       <span role='img' aria-label='emoji atardecer'>🌅: {new Date(data.sunset * 1000).toLocaleTimeString('en-US')}</span>
       {
         data.temp.min && (
           <ContainerTitles>
-            <p>Temperatura:</p>
+            <SubTitle>Temperatura:</SubTitle>
             <span role='img' aria-label='emoji minimo'>➖ {data.temp.min} ° C</span>
             <span role='img' aria-label='emoji maximo'>➕ {data.temp.max} ° C</span>
             <span role='img' aria-label='emoji mañana'>☀ {data.temp.morn} ° C</span>

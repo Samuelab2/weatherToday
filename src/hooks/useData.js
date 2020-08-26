@@ -20,7 +20,7 @@ export const useData = () => {
       .then(data => {
         setGraphDaily(formatData(data.daily.slice(1, 6)))
         setDataHourly(data.hourly)
-        setDataCurrent(data.current)
+        setDataCurrent(data.daily[0])
         setDataDaily(data.daily.slice(1, 6))
         setIsloading(false)
       })

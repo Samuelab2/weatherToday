@@ -14,7 +14,7 @@ const rainColor = {
 }
 
 export const Div = styled.div`
-  min-height: calc(100vh - 160px);
+  min-height: calc(100vh - 175px);
   display: flex;
   flex-direction: column;
   background: ${props => props.bg.includes('nubes') ? cloudColor.background 
@@ -43,8 +43,7 @@ export const Title = styled.h3`
   font-size: 40px;
 `
 
-export const SubTitle = styled.h3`
-  margin: 0;
+export const SubTitle = styled.p`
   text-transform: capitalize;
   font-size: 20px;
 `

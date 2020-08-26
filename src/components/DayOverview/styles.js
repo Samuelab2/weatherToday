@@ -22,27 +22,21 @@ export const Div = styled.div`
   align-items: center;
   font-weight: bold;
 `
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-`
 
 export const ContainerTitles = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 50%;
-`
-
-export const Title = styled.h3`
-  font-size: 30px;
-  margin: 0;
+  width: 100%;
+  text-align: center;
 `
 
 export const SubTitle = styled.span`
   text-transform: capitalize;
   line-height: 30px;
+`
+
+export const Title = styled.p`
+  font-size: 20px;
+  text-decoration: underline;
 `

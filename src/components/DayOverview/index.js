@@ -1,25 +1,31 @@
 import React from 'react'
-import { Div, Container, Title, ContainerTitles, SubTitle } from './styles'
+import { Div, ContainerTitles, SubTitle, Title } from './styles'
 
-const WeatherCard = ({ data }) => {
-  const days = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado']
+const DayOverview = ({ data }) => {
 
   return (
     <Div bg={data.weather[0].description}>
-      <Container>
-        <Title>{data.temp.day} ° C</Title>
-        <img src={`http://openweathermap.org/img/wn/${data.weather[0].icon === '01n' ? '01d' : data.weather[0].icon}@2x.png`} alt='weather icon' />
-        <span>{data.weather[0].description}</span>
-      </Container>
       <ContainerTitles>
-        <SubTitle>{days[new Date(data.dt * 1000).getDay()]}</SubTitle>
-        <SubTitle>{new Date(data.dt * 1000).toLocaleDateString('en-US')}</SubTitle>
+        <Title>Datos generales:</Title>
         <SubTitle>Humedad: {data.humidity}%</SubTitle>
         <SubTitle>Viento: {data.wind_speed} mts</SubTitle>
         <SubTitle>Presión: {data.pressure} hPa</SubTitle>
+        <SubTitle>Nubes: {data.clouds}%</SubTitle>
+        <SubTitle>Precipitación: {data.pop}</SubTitle>
+        {
+          data.rain && <SubTitle>Lluvia: {data.rain} mm</SubTitle>
+        }
+        {
+          data.snow && <SubTitle>Nieve: {data.snow} mm</SubTitle>
+        }
+        <Title>Percepción de temperatura:</Title>
+        <SubTitle>Mañana: {data.feels_like.morn} ° C</SubTitle>
+        <SubTitle>Día: {data.feels_like.day} ° C</SubTitle>
+        <SubTitle>Tarde: {data.feels_like.eve} ° C</SubTitle>
+        <SubTitle>Noche: {data.feels_like.night} ° C</SubTitle>
       </ContainerTitles>
     </Div>
   )
 }
 
-export default WeatherCard
+export default DayOverview
