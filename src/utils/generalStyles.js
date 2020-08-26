@@ -27,3 +27,12 @@ export const Link = styled(LinkRouter)`
   text-decoration: none;
   color: black
 `
+
+export const GeneralTitle = styled.h3`
+  margin: 30px 0;
+  font-size: 20px;
+  max-width: 500px;
+  text-align: center;
+  color: #9e531d;
+  font-weight: bold;
+`

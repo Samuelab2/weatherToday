@@ -53,3 +53,11 @@ export const FocusElement = styled.span`
   font-size: 40px;
   border-bottom: 5px dotted #232c61;
 `
+
+export const ContainerTitles = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  text-align: center;
+`

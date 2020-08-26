@@ -3,6 +3,7 @@ import Layout from '../components/Layout'
 import ForecastCard from '../components/ForecastCard'
 import { useForecast } from '../hooks/useForecast'
 import LoadingStyle from '../components/LoadingStyle'
+import { GeneralTitle } from '../utils/generalStyles'
 
 const Forecast = () => {
   const { forecast, isLoading } = useForecast()
@@ -13,7 +14,7 @@ const Forecast = () => {
         isLoading
           ? <LoadingStyle loading={isLoading} type='view' />
           : <>
-              <h3>El detalle del clima actualizado cada 3 horas es el siguiente: </h3>
+              <GeneralTitle>Detalle de clima actualizado cada 3 horas: </GeneralTitle>
               {
                 forecast.list.map((item, index) => <ForecastCard key={index} data={item} />)
               }

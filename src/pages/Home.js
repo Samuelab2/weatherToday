@@ -2,7 +2,7 @@ import React from 'react'
 import Layout from '../components/Layout'
 import Graphic from '../components/Graphic'
 import { useData } from '../hooks/useData'
-import { Link } from '../utils/generalStyles'
+import { Link, GeneralTitle } from '../utils/generalStyles'
 import WeatherCard from '../components/WeatherCard'
 import LoadingStyle from '../components/LoadingStyle'
 import WeatherMainView from '../components/WeatherMainView'
@@ -18,7 +18,7 @@ const Home = () => {
         ? <LoadingStyle loading={isLoading} type='view' />
         : (<>
             <WeatherMainView data={dataCurrent} />
-            <h3>Pronostico para los proximos 5 dias:</h3>
+            <GeneralTitle>Pronostico para los proximos 5 dias:</GeneralTitle>
             {
               dataDaily.map((item, index) => {
                 return (
@@ -31,7 +31,7 @@ const Home = () => {
             {
               graphDaily && (
                 <>
-                  <h3>Variación de temperatura para los proximos 5 dias:</h3>
+                  <GeneralTitle>Variación de temperatura para los proximos 5 dias:</GeneralTitle>
                   <Graphic data={graphDaily} type='daily' />
                 </>
               )

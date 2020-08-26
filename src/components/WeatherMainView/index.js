@@ -1,5 +1,5 @@
 import React from 'react'
-import { Div, FocusElement, Title, SubTitle } from './styles'
+import { Div, FocusElement, Title, SubTitle, ContainerTitles } from './styles'
 
 const WeatherMainView = ({ data }) => {
   const days = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes']
@@ -17,14 +17,14 @@ const WeatherMainView = ({ data }) => {
       <span>🌅: {new Date(data.sunset * 1000).toLocaleTimeString()}</span>
       {
         data.temp.min && (
-          <div>
+          <ContainerTitles>
             <p>Temperatura:</p>
-            <span>Minima: {data.temp.min} ° C</span>
-            <span>Maxima: {data.temp.max} ° C</span>
-            <span>Mañana: {data.temp.morn} ° C</span>
-            <span>Tarde: {data.temp.eve} ° C</span>
-            <span>Noche: {data.temp.night} ° C</span>
-          </div>
+            <span>➖ {data.temp.min} ° C</span>
+            <span>➕ {data.temp.max} ° C</span>
+            <span>☀ {data.temp.morn} ° C</span>
+            <span>⛅ {data.temp.eve} ° C</span>
+            <span>🌜 {data.temp.night} ° C</span>
+          </ContainerTitles>
         )
       }
     </Div>
