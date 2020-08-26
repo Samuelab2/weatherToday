@@ -6,7 +6,7 @@ import { useForecast } from '../hooks/useForecast'
 import LoadingStyle from '../components/LoadingStyle'
 
 const Weather = ({ location }) => {
-  const [ data, setData ] = useState(location.state.currentDay)
+  const [ data ] = useState(location.state.currentDay)
   const { isLoading, graphHours } = useForecast(location.state.currentDay)
 
   return (

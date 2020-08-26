@@ -8,7 +8,7 @@ const Layout = ({ children, title, subtitle }) => {
   return (
     <>
       <Helmet>
-        {title && <title>{title} | WeatherToday ⛅</title>}
+        {title && <title>{title} | WeatherToday</title>}
         {subtitle && <meta name='description' content={subtitle}/>}
       </Helmet>
       <Div>
