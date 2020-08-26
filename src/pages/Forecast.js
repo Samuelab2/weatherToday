@@ -15,7 +15,7 @@ const Forecast = () => {
           : <>
               <h3>El detalle del clima actualizado cada 3 horas es el siguiente: </h3>
               {
-                forecast.list.map((item, index) => <ForecastCard data={item} index={index} />)
+                forecast.list.map((item, index) => <ForecastCard key={index} data={item} />)
               }
             </>
       }

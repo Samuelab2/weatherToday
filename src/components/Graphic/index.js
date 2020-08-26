@@ -30,7 +30,7 @@ const Graphic = ({ data, type }) => {
   const formatDate = type === 'hours' ? timeFormat("%A, %-I:%M:%S %p") : timeFormat("%A, %-d/%-m/%Y")
 
   const {
-    width = 450,
+    width = 340,
     height = 200,
     margin = { top: 0, right: 0, bottom: 0, left: 0 },
     showTooltip,

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const HeaderTitle = styled.header`
   background: #ffffff;
   height: 60px;
+  min-width: 360px;
   max-width: 500px;
   width: 100%;
   margin: 0 auto;

@@ -1,20 +1,20 @@
 import React from 'react'
-import { Div } from './styles'
+import { Div, FocusElement, Title, SubTitle } from './styles'
 
 const WeatherMainView = ({ data }) => {
   const days = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes']
 
   return (
     <Div bg={data.weather[0].description}>
-      <h3>Santiago</h3>
-      <h3>{`${days[new Date(data.dt * 1000).getDay()]}, ${new Date(data.dt * 1000).toLocaleTimeString('en-US')}`}</h3>
+      <Title>Santiago</Title>
+      <SubTitle>{`${days[new Date(data.dt * 1000).getDay()]}, ${new Date(data.dt * 1000).toLocaleTimeString()}`}</SubTitle>
       <img src={`http://openweathermap.org/img/wn/${data.weather[0].icon === '01n' ? '01d' : data.weather[0].icon}@2x.png`} alt='weather icon' />
       {
-        data.temp.day ? <span>{data.temp.day} ° C  </span> : <span>{data.temp} ° C</span>
+        data.temp.day ? <FocusElement>{data.temp.day}°C  </FocusElement> : <FocusElement>{data.temp}°C</FocusElement>
       }
-      <span>{data.weather[0].description}</span>
-      <span>Amanecer: {new Date(data.sunrise * 1000).toLocaleTimeString()}</span>
-      <span>Atardecer {new Date(data.sunset * 1000).toLocaleTimeString()}</span>
+      <SubTitle>{data.weather[0].description}</SubTitle>
+      <span>🌄: {new Date(data.sunrise * 1000).toLocaleTimeString()}</span>
+      <span>🌅: {new Date(data.sunset * 1000).toLocaleTimeString()}</span>
       {
         data.temp.min && (
           <div>

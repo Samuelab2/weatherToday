@@ -8,10 +8,11 @@ import NotFound from '../components/NotFound';
 import Home from '../pages/Home';
 import Forecast from '../pages/Forecast';
 import Weather from '../pages/Weather';
-
+import ScrollToTop from '../utils/scrollTop'
 
 const App = () => (
   <Router>
+    <ScrollToTop />
       <Switch>
         <Route exact path='/' component={Home} />
         <Route exact path='/forecast' component={Forecast} />
