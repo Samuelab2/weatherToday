@@ -8,9 +8,10 @@ import LoadingStyle from '../components/LoadingStyle'
 const Weather = ({ location }) => {
   const [ data ] = useState(location.state.currentDay)
   const { isLoading, graphHours } = useForecast(location.state.currentDay)
+  const days = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes']
 
   return (
-    <Layout title='dia' subtitle='details for the day ....'>
+    <Layout title={days[new Date(data.dt * 1000).getDay()]} subtitle='details for the day ....'>
       <WeatherMainView data={data} />
       {
         isLoading 
