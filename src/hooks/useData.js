@@ -12,7 +12,7 @@ export const useData = () => {
     const formatData = (data) => {
       const arr = []
       data.forEach(item => {
-        arr.push({x: item.dt * 1000, y: (item.temp.max + item.temp.min) / 2})
+        arr.push({x: item.dt * 1000, y: (item.temp.max + item.temp.min).toFixed(2) / 2})
       })
       return(arr)
     }

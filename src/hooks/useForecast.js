@@ -13,7 +13,7 @@ export const useForecast = (location = {}) => {
       data.forEach(item => {
         let objDay = new Date(item.dt * 1000).getDate()
         if (objDay === presentDay) {
-          arr.push({x: item.dt * 1000, y: (item.main.temp_min + item.main.temp_max) / 2})
+          arr.push({x: item.dt * 1000, y: (item.main.temp_min + item.main.temp_max).toFixed(3) / 2})
         }
       })
       return(arr)

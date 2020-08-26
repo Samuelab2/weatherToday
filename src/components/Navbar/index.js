@@ -1,11 +1,11 @@
 import React from 'react'
-import { Nav, Link } from './styles'
+import { Nav, NavLink } from './styles'
 
 const NavBar = () => {
   return (
     <Nav>
-      <Link to='/'>Home</Link>
-      <Link to='/forecast'>Forecast</Link>
+      <NavLink to='/'>Home</NavLink>
+      <NavLink to='/forecast'>Forecast</NavLink>
     </Nav>
   )
 }

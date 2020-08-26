@@ -1,12 +1,11 @@
 import React from 'react'
 import { HeaderTitle } from './styles'
+import { Logo } from '../Logo/Logo'
 
 const Header = () => {
   return (
     <HeaderTitle>
-      <h1>
-        WeatherToday <span role="img" aria-label='weather emoji'>⛅</span>
-      </h1>
+      <Logo />
     </HeaderTitle>
   )
 }

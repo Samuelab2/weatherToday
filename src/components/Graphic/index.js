@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-import { AreaClosed, Bar } from '@vx/shape';
-import { curveMonotoneX } from '@vx/curve';
+import { AreaClosed, Line, Bar } from '@vx/shape';
+import { curveLinear } from '@vx/curve';
 import { scaleTime, scaleLinear } from '@vx/scale';
 import { useTooltip, Tooltip, defaultStyles } from '@vx/tooltip';
 import { localPoint } from '@vx/event';
@@ -8,23 +8,21 @@ import { LinearGradient } from '@vx/gradient';
 import { max, extent, bisector } from 'd3-array';
 import { timeFormat } from 'd3-time-format';
 
-export const background = '#3b6978';
-export const background2 = '#204051';
-export const accentColor = '#edffea';
-export const accentColorDark = '#75daad';
+export const background = '#d54062';
+export const background2 = '#ffa36c';
+export const accentColor = '#ebdc87';
+export const accentColorDark = '#799351';
 const tooltipStyles = {
   ...defaultStyles,
-  background,
+  background: accentColorDark,
   position: 'absolute',
   border: '1px solid white',
   color: 'white',
 };
 
-// util
-
 // accessors
 const getDate = (d) => new Date(d.x);
-const getStockValue = (d) => d.y;
+const getTempValue = (d) => d.y;
 const bisectDate = bisector(d => new Date(d.x)).left;
 
 const Graphic = ({ data, type }) => {
@@ -56,9 +54,9 @@ const Graphic = ({ data, type }) => {
     domain: extent(data, getDate),
   })
 
-  const stockValueScale = scaleLinear({
+  const tempValueScale = scaleLinear({
     range: [yMax, 0],
-    domain: [0, (max(data, getStockValue) || 0) + yMax / 10],
+    domain: [0, (max(data, getTempValue) || 0) + yMax / 6],
     nice: true,
   })
 
@@ -76,7 +74,7 @@ const Graphic = ({ data, type }) => {
     showTooltip({
       tooltipData: d,
       tooltipLeft: x,
-      tooltipTop: stockValueScale(getStockValue(d)),
+      tooltipTop: tempValueScale(getTempValue(d)),
     });
   }
 
@@ -92,16 +90,16 @@ const Graphic = ({ data, type }) => {
           rx={14}
         />
         <LinearGradient id="area-background-gradient" from={background} to={background2} />
-        <LinearGradient id="area-gradient" from={accentColor} to={accentColor} toOpacity={0.1} />
+        <LinearGradient id="area-gradient" from={accentColor} to={accentColor} toOpacity={0.5} />
         <AreaClosed
           data={data}
           x={d => dateScale(getDate(d))}
-          y={d => stockValueScale(getStockValue(d))}
-          yScale={stockValueScale}
+          y={d => tempValueScale(getTempValue(d))}
+          yScale={tempValueScale}
           strokeWidth={1}
           stroke="url(#area-gradient)"
           fill="url(#area-gradient)"
-          curve={curveMonotoneX}
+          curve={curveLinear}
         />
         <Bar
           x={0}
@@ -115,14 +113,46 @@ const Graphic = ({ data, type }) => {
           onMouseMove={handleTooltip}
           onMouseLeave={() => hideTooltip()}
         />
+        {tooltipData && (
+          <g>
+            <Line
+              from={{ x: tooltipLeft, y: 0 }}
+              to={{ x: tooltipLeft, y: yMax }}
+              stroke={accentColorDark}
+              strokeWidth={2}
+              pointerEvents="none"
+              strokeDasharray="5,2"
+            />
+            <circle
+              cx={tooltipLeft}
+              cy={tooltipTop + 1}
+              r={4}
+              fill="black"
+              fillOpacity={0.1}
+              stroke="black"
+              strokeOpacity={0.1}
+              strokeWidth={2}
+              pointerEvents="none"
+            />
+            <circle
+              cx={tooltipLeft}
+              cy={tooltipTop}
+              r={4}
+              fill={accentColorDark}
+              stroke="white"
+              strokeWidth={2}
+              pointerEvents="none"
+            />
+          </g>
+        )}
       </svg>
       {tooltipData && (
         <>
-          <Tooltip top={tooltipTop - 12} left={tooltipLeft + 12} style={tooltipStyles}>
-            {`${getStockValue(tooltipData)} ° C`}
+          <Tooltip top={tooltipTop - 25} left={tooltipLeft - 45} style={tooltipStyles}>
+            {`${getTempValue(tooltipData)} ° C`}
           </Tooltip>
           <Tooltip
-            top={yMax - 14}
+            top={yMax + 20}
             left={tooltipLeft}
             style={{
               ...defaultStyles,
